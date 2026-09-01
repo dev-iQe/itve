@@ -41,4 +41,9 @@ final class FavoritesStore {
         }
         save()
     }
+
+    func clearAll() {
+        items.removeAll()
+        save()
+    }
 }
