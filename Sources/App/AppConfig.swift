@@ -8,7 +8,7 @@ import Foundation
 enum AppConfig {
 
     /// رابط موقع الأفلام الفعلي الذي تملكه الشركة. غيّره إلى الرابط الحقيقي.
-    static let siteBaseURL = "https://example.com"
+    static let siteBaseURL = "https://instagram.com/eng_azawy"
 
     /// يبني رابط بحث على موقع الشركة باسم العمل (فيلم/مسلسل).
     /// الصيغة الافتراضية "?s=" شائعة في مواقع ووردبريس، عدّلها لتطابق
