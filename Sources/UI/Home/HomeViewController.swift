@@ -79,38 +79,18 @@ final class HomeViewController: UIViewController {
         }
     }
 
-    /// الأزرار الزجاجية العلوية + القوائم المنسدلة (UIMenu الأصلية من النظام).
+    /// زر الإعدادات الزجاجي العلوي (يمين الشاشة) + القائمة المنسدلة (UIMenu الأصلية من النظام).
     private func setupTopBar() {
-        let menuButton = GlassIconButton(systemImage: "line.3.horizontal")
-        menuButton.menu = buildQuickMenu()
-        menuButton.showsMenuAsPrimaryAction = true
-
         let settingsButton = GlassIconButton(systemImage: "gearshape.fill")
         settingsButton.menu = buildSettingsMenu()
         settingsButton.showsMenuAsPrimaryAction = true
 
-        [menuButton, settingsButton].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview($0)
-        }
+        settingsButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(settingsButton)
 
         NSLayoutConstraint.activate([
-            menuButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
-            menuButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-
             settingsButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
             settingsButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
-        ])
-    }
-
-    private func buildQuickMenu() -> UIMenu {
-        UIMenu(title: "", children: [
-            UIAction(title: "الرئيسية", image: UIImage(systemName: "house.fill")) { [weak self] _ in
-                self?.collectionView.setContentOffset(.zero, animated: true)
-            },
-            UIAction(title: "المكتبة", image: UIImage(systemName: "bookmark.fill")) { [weak self] _ in
-                self?.tabBarController?.selectedIndex = 3
-            }
         ])
     }
 
@@ -119,9 +99,11 @@ final class HomeViewController: UIViewController {
             UIAction(title: "تحديث", image: UIImage(systemName: "arrow.clockwise")) { [weak self] _ in
                 self?.loadData()
             },
-            UIAction(title: "فتح الموقع مباشرة", image: UIImage(systemName: "safari")) { [weak self] _ in
-                guard let url = URL(string: AppConfig.siteBaseURL) else { return }
-                self?.navigationController?.pushViewController(PlayerViewController(url: url), animated: true)
+            UIAction(title: "الإعدادات", image: UIImage(systemName: "gearshape")) { [weak self] _ in
+                self?.navigationController?.pushViewController(SettingsViewController(), animated: true)
+            },
+            UIAction(title: "مطور التطبيق", image: UIImage(systemName: "person.crop.circle")) { [weak self] _ in
+                self?.navigationController?.pushViewController(DeveloperViewController(), animated: true)
             }
         ])
     }
