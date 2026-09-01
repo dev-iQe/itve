@@ -1,0 +1,6 @@
+MoviesApp.xcodeproj/
+build/
+Payload/
+*.ipa
+Generated-Info.plist
+.DS_Store
